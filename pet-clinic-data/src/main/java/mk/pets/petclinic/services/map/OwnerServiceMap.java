@@ -14,6 +14,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
     private final PetTypeService petTypeService;
     private final PetService petService;
 
+
     public OwnerServiceMap(PetTypeService petTypeService, PetService petService) {
         this.petTypeService = petTypeService;
         this.petService = petService;
@@ -42,7 +43,7 @@ public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements 
                         throw new RuntimeException("Pet Type is required");
                     }
                     if (pet.getId() == null) { //handling pet id separately from pet type id above
-                        Pet savedPet = petService.save(pet);
+                        Pet savedPet = petService.save(pet); //first save, then set id
                         pet.setId(savedPet.getId());
                     }
                 });
