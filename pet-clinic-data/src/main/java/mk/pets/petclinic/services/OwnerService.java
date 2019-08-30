@@ -4,7 +4,7 @@ import mk.pets.petclinic.model.Owner;
 
 public interface OwnerService extends CrudService<Owner, Long> {
 
-    Owner findByLastName(String lastname);
+    Owner findByLastName(String lastName);
     /* not needed after extending interface
     Owner findById(Long id);
     Owner save(Owner owner);
