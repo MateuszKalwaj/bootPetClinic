@@ -16,9 +16,14 @@ public class OwnerController {
     }
 
     @RequestMapping({"", "/", "/index", "/index.html"})
-
     public String listOwners(Model model) {
         model.addAttribute("owners", ownerService.findAll()); //"owners" is passing to Thymeleaf
         return "owners/index";
     }
+
+    @RequestMapping("/find")
+    public String findOwners() {
+        return "notimplemented";
+    }
+
 }
