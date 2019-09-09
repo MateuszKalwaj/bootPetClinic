@@ -21,5 +21,8 @@ public class BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //that means that provider must assign primary keys
     private Long id;
-
+//its for the thymeleaf
+    public boolean isNew() {
+        return this.id == null;
+    }
 }
