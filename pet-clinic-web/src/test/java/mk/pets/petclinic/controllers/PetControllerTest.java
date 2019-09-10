@@ -1,6 +1,7 @@
 package mk.pets.petclinic.controllers;
 
 import mk.pets.petclinic.model.Owner;
+import mk.pets.petclinic.model.Pet;
 import mk.pets.petclinic.model.PetType;
 import mk.pets.petclinic.services.OwnerService;
 import mk.pets.petclinic.services.PetService;
@@ -75,7 +76,7 @@ class PetControllerTest {
         when(petTypeService.findAll()).thenReturn(petTypes);
 
         mockMvc.perform((post("/owners/1/pets/new")))
-                .andExpect(status().isOk())
+                .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/owners/1"));
         verify(petService).save(any());
     }
@@ -84,8 +85,10 @@ class PetControllerTest {
     void initUpdateForm() throws Exception {
         when(ownerService.findById(anyLong())).thenReturn(owner);
         when(petTypeService.findAll()).thenReturn(petTypes);
+        when(petService.findById(anyLong()))
+                .thenReturn(Pet.builder().id(2L).build());
 
-        mockMvc.perform(get("/owners/1/pets/edit"))
+        mockMvc.perform(get("/owners/1/pets/2/edit"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("owner"))
                 .andExpect(model().attributeExists("pet"))
